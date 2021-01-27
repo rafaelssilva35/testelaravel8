@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Endereco;
+use App\Services\Endereco\BuscaCep\Cep;
 
 class EnderecoController extends Controller
 {
@@ -45,8 +46,15 @@ class EnderecoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($cep)
     {
+        $endereco = (Endereco::where('cep', $cep)->first());
+
+        if ($endereco == null) {            
+            $endereco = Cep::get($cep);
+        }
+
+        return $endereco;
     }
 
     /**

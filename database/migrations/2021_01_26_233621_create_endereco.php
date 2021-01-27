@@ -6,6 +6,35 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEndereco extends Migration
 {
+    const UF = [
+        'AC',
+        'AL',
+        'AP',
+        'AM',
+        'BA',
+        'CE',
+        'ES',
+        'GO',
+        'MA',
+        'MT',
+        'MS',
+        'MG',
+        'PA',
+        'PB',
+        'PR',
+        'PE',
+        'PI',
+        'RJ',
+        'RN',
+        'RS',
+        'RO',
+        'RR',
+        'SC',
+        'SP',
+        'SE',
+        'TO'
+    ];
+
     /**
      * Run the migrations.
      *
@@ -20,8 +49,7 @@ class CreateEndereco extends Migration
             $table->string('complemento');
             $table->string('bairro');
             $table->string('localidade');            
-            $table->unsignedBigInteger('uf_id');
-            $table->foreign('uf_id')->references('id')->on('ufs');
+            $table->enum('uf', self::UF);
             $table->timestamps();
         });
     }
