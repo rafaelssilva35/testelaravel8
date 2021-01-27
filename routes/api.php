@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Endereco;
+use App\Http\Controllers\Api\EnderecoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,4 +14,4 @@ use App\Http\Controllers\Api\Endereco;
 |
 */
 
-Route::apiResource('endereco', Endereco::class);
+Route::apiResource('cep', EnderecoController::class);
