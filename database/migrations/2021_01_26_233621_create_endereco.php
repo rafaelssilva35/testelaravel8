@@ -13,14 +13,14 @@ class CreateEndereco extends Migration
      */
     public function up()
     {
-        Schema::create('endereco', function (Blueprint $table) {
+        Schema::create('enderecos', function (Blueprint $table) {
             $table->id();
             $table->string('logradouro');
             $table->string('complemento');
             $table->string('bairro');
             $table->string('localidade');            
             $table->unsignedBigInteger('uf_id');
-            $table->foreign('uf_id')->references('id')->on('uf');
+            $table->foreign('uf_id')->references('id')->on('ufs');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateEndereco extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('endereco');
+        Schema::dropIfExists('enderecos');
     }
 }
