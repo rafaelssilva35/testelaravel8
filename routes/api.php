@@ -15,3 +15,4 @@ use App\Http\Controllers\Api\EnderecoController;
 */
 
 Route::apiResource('cep', EnderecoController::class);
+Route::get('search/{logradouro}',  'App\Http\Controllers\Api\EnderecoController@search');

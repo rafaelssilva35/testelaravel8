@@ -6,46 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Endereco;
 use App\Services\Endereco\BuscaCep\Cep;
-
+use App\Http\Requests\EnderecoRequest;
 class EnderecoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function store(EnderecoRequest $request)
     {
-        //
+        return Endereco::where('cep', $request->cep)->first() ?? Endereco::create($request->toArray());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($cep)
     {
         $endereco = (Endereco::where('cep', $cep)->first());
@@ -57,37 +25,31 @@ class EnderecoController extends Controller
         return $endereco;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $endereco = Endereco::find($id);
+
+        if ($endereco) {
+            $endereco->update($request->toArray()); 
+            return $endereco;
+        }
+
+        return response()->json('Endereço não encontrado', 404);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        try {
+            $result = Endereco::destroy($id);
+        } catch (\Exception $th) {
+            throw 'Erro ao deletar';
+        }
+        return $result?response()->json('Endereço deletado', 200):response()->json('Indice não encontrado', 404);
+    }
+
+    public function search($logradouro)
+    {
+        $orders = Endereco::search($logradouro)->get();
+        return $orders;
     }
 }
