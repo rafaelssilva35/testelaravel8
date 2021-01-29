@@ -34,3 +34,8 @@
 #### Migrations
 
 -   docker exec docker-laravel8-teste php artisan migrate
+
+#### imgs search
+![alt text](![alt text](https://raw.githubusercontent.com/rafaelssilva35/testelaravel8/master/public/search.gif?token=ADLFKNXJGKE7YPV3Q7VVKELACRNKE "Search")"Search")
+#### imgs crud
+![alt text](![alt text](https://raw.githubusercontent.com/rafaelssilva35/testelaravel8/master/public/crud.gif?token=ADLFKNV6IXUJUMVNRKMUR7TACRODK "crud")"crud")
