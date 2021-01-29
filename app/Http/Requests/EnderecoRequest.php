@@ -27,7 +27,6 @@ class EnderecoRequest extends FormRequest
     {
         return [
             'cep' => 'required', 
-            'logradouro' => 'required', 
             'complemento' => 'required', 
             'bairro' => 'required', 
             'localidade' => 'required', 

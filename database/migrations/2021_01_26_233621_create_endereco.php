@@ -46,7 +46,7 @@ class CreateEndereco extends Migration
             $table->id();
             $table->string('cep');
             $table->string('logradouro');
-            $table->string('complemento');
+            $table->string('complemento')->nullable();
             $table->string('bairro');
             $table->string('localidade');            
             $table->enum('uf', self::UF);

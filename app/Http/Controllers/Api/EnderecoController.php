@@ -9,7 +9,12 @@ use App\Services\Endereco\BuscaCep\Cep;
 use App\Http\Requests\EnderecoRequest;
 class EnderecoController extends Controller
 {
-    public function store(EnderecoRequest $request)
+    public function index()
+    {
+        return Endereco::get();
+    }    
+    
+    public function store(Request $request)
     {
         return Endereco::where('cep', $request->cep)->first() ?? Endereco::create($request->toArray());
     }
@@ -25,9 +30,9 @@ class EnderecoController extends Controller
         return $endereco;
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $cep)
     {
-        $endereco = Endereco::find($id);
+        $endereco = Endereco::where('cep', $cep)->first();
 
         if ($endereco) {
             $endereco->update($request->toArray()); 
